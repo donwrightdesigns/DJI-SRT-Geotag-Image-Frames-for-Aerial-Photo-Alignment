@@ -2,8 +2,6 @@
 
 ![Geotagged Aerial Video Frames for Photogrammetry](http://www.donwrightdesigns.com/wp-content/uploads/2025/07/Geotag-Image.jpg)
 
-![Shutter Encoder Logo](http://www.donwrightdesigns.com/wp-content/uploads/2025/06/shutter-encoder.jpg)
-
 A Python script that automatically geotags DJI drone image frames using GPS coordinates and altitude data from corresponding .SRT subtitle files.
 
 ## Overview
@@ -53,6 +51,7 @@ Where:
 ## Recommended Frame Extraction Workflow
 
 ### Using Shutter Encoder + FFmpeg
+![Shutter Encoder Logo](http://www.donwrightdesigns.com/wp-content/uploads/2025/06/shutter-encoder.jpg)
 
 For optimal compatibility with this geotagging script, we recommend using **Shutter Encoder** to extract frames from your DJI videos. Shutter Encoder uses FFmpeg under the hood and can be configured to output frames with the exact naming convention this script expects.
 
