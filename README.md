@@ -2,7 +2,7 @@
 
 ![Geotagged Aerial Video Frames for Photogrammetry](http://www.donwrightdesigns.com/wp-content/uploads/2025/07/Geotag-Image.jpg)
 
-![Shutter Encoder Logo](http://www.donwrightdesigns.com/wp-content/uploads/2025/06/shutter-encoder.webp)
+![Shutter Encoder Logo](http://www.donwrightdesigns.com/wp-content/uploads/2025/06/shutter-encoder.jpg)
 
 A Python script that automatically geotags DJI drone image frames using GPS coordinates and altitude data from corresponding .SRT subtitle files.
 
