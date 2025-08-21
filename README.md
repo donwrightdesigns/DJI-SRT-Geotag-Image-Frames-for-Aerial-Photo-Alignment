@@ -1,6 +1,6 @@
 # DJI Frame Geotagging Script
 
-![Geotagged Aerial Video Frames for Photogrammetry](http://www.donwrightdesigns.com/wp-content/uploads/2025/07/Geotag-Image.jpg)
+<img style="width:60%;" src="http://www.donwrightdesigns.com/wp-content/uploads/2025/07/Geotag-Image.jpg">
 
 A Python script that automatically geotags DJI drone image frames using GPS coordinates and altitude data from corresponding .SRT subtitle files.
 
