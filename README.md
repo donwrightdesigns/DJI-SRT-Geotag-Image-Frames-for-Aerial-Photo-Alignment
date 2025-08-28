@@ -1,4 +1,4 @@
-# DJI Frame Geotagging Script
+# DJI Videogrammetry Frame Geotagging Script
 
 <img style="width:60%;" src="http://www.donwrightdesigns.com/wp-content/uploads/2025/07/Geotag-Image.jpg">
 
