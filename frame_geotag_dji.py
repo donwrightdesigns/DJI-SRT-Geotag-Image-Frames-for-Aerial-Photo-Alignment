@@ -80,14 +80,31 @@ def set_gps_location(file_path, lat, lon, abs_alt, rel_alt=None):
         return False
 
 def extract_video_prefix(filename):
-    """Extract DJI video prefix from filename (e.g., 'DJI_0609_SE_000001.jpg' -> 'DJI_0609')"""
+    """Extract DJI video prefix from filename (e.g., 'DJI_0609_SE_000001.jpg' or 'DJI_0609_000001.jpg' -> 'DJI_0609')"""
+    # Try pattern with _SE_ first (original format)
     match = re.match(r'(DJI_\d+)_SE_\d+\.jpg$', filename, re.IGNORECASE)
+    if match:
+        return match.group(1)
+    
+    # Try pattern without _SE_ (alternative format)
+    match = re.match(r'(DJI_\d+)_\d+\.jpg$', filename, re.IGNORECASE)
     return match.group(1) if match else None
 
 def extract_frame_number(filename):
-    """Extract frame number from filename (e.g., 'DJI_0609_SE_000001.jpg' -> 1)"""
+    """Extract frame number from filename (e.g., 'DJI_0609_SE_000001.jpg' or 'DJI_0609_000001.jpg' -> 1)"""
+    # Try pattern with _SE_ first (original format)
     match = re.search(r'_SE_(\d+)\.jpg$', filename, re.IGNORECASE)
-    return int(match.group(1)) if match else None
+    if match:
+        return int(match.group(1))
+    
+    # Try pattern without _SE_ (alternative format)
+    match = re.search(r'_([^_]+)\.jpg$', filename, re.IGNORECASE)
+    if match:
+        try:
+            return int(match.group(1))
+        except ValueError:
+            return None
+    return None
 
 def geotag_dji_frames():
     """Finds DJI images and SRT files in the current directory and geotags them."""
@@ -105,8 +122,8 @@ def geotag_dji_frames():
             prefix = f[:-4]  # Remove .SRT extension
             srt_files[prefix] = f
             
-        elif f.lower().endswith(".jpg") and "_SE_" in f:
-            # Group images by their video prefix
+        elif f.lower().endswith(".jpg") and f.startswith("DJI_"):
+            # Group images by their video prefix (both _SE_ and non-_SE_ formats)
             prefix = extract_video_prefix(f)
             if prefix:
                 frame_num = extract_frame_number(f)
@@ -118,7 +135,7 @@ def geotag_dji_frames():
         return
         
     if not image_groups:
-        print("Error: No DJI image files found (format: DJI_XXXX_SE_XXXXXX.jpg). Exiting.")
+        print("Error: No DJI image files found (formats: DJI_XXXX_SE_XXXXXX.jpg or DJI_XXXX_XXXXXX.jpg). Exiting.")
         return
 
     # Match SRT files with image groups
